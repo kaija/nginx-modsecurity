@@ -1,0 +1,19 @@
+Source: libnginx-mod-http-modsecurity
+Section: httpd
+Priority: optional
+Maintainer: Kaija Chang <kaija.chang@gmail.com>
+Uploaders: Kaija Chang <kaija.chang@gmail.com>
+Build-Depends: debhelper (>= 11), build-essential, libpcre3, libpcre3-dev,
+ libssl-dev, libtool, autoconf, libxml2-dev, libcurl4-openssl-dev, apache2-dev,
+ libpcre3-dev, libxml2-dev, zlib1g-dev, libssl-dev, libgd-dev, libgeoip-dev,
+ libxslt1-dev, libhiredis-dev, libluajit-5.1-dev, libmaxminddb-dev, libmhash-dev,
+ libpam0g-dev, libperl-dev, quilt, dwz, debhelper, dh-systemd, software-properties-common
+Standards-Version: 3.9.8.0
+
+Package: libnginx-mod-http-modsecurity
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+  nginx-common (>= 1.18.0),
+Suggests: modsecurity-crs
+Description: Web applications security for Nginx
+ Modsecurity is an Nginx module for the web application firewall.
