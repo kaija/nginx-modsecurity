@@ -23,6 +23,8 @@ RUN git clone -b v1.0.1 https://github.com/SpiderLabs/ModSecurity-nginx.git ${PA
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get source nginx
 
+RUN apt install -y liblua5.1-0 lua5.1 lua5.1-dev
+
 RUN mv nginx-${NGINX_VERSION} ${PACKAGE_NAME}-${PACKAGE_VERSION}/nginx
 
 RUN git clone libmodsecurity.git ${PACKAGE_NAME}-${PACKAGE_VERSION}/libmodsecurity && cd ${PACKAGE_NAME}-${PACKAGE_VERSION}/libmodsecurity && git submodule update --init --recursive && rm -rf .git
@@ -30,7 +32,6 @@ RUN git clone libmodsecurity.git ${PACKAGE_NAME}-${PACKAGE_VERSION}/libmodsecuri
 RUN tar -c ${PACKAGE_NAME}-${PACKAGE_VERSION} | xz -zT 0 - > ${PACKAGE_NAME}_${PACKAGE_VERSION}.orig.tar.xz
 
 COPY debian /opt/nginx/build/debian
-
 
 RUN cp -dpR debian ${PACKAGE_NAME}-${PACKAGE_VERSION}/debian
 
