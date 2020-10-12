@@ -1,0 +1,13 @@
+libnginx-mod-http-modsecurity (1.0.1-1~focal1) focal; urgency=medium
+
+  * Upgrade to Nginx 1.18.0. and Ubuntu focal support
+
+libnginx-mod-http-modsecurity (1.0.1-1~bionic1) bionic; urgency=medium
+
+  * Upgrade to Nginx 1.18.0.
+
+libnginx-mod-http-modsecurity (1.0.0-1~bionic1) bionic; urgency=medium
+
+  * Initial release.
+
+ -- Hongli Lai <hongli@phusion.nl>  Wed, 21 Feb 2018 13:59:26 +0000

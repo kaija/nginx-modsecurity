@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt update && apt install -y build-essential git libpcre3 libpcre3-dev libssl-dev libtool autoconf libxml2-dev libcurl4-openssl-dev apache2-dev libpcre3-dev libxml2-dev zlib1g-dev libssl-dev libgd-dev libgeoip-dev libxslt1-dev libxml2-dev libhiredis-dev libluajit-5.1-dev libmaxminddb-dev libmhash-dev libpam0g-dev libperl-dev quilt dwz debhelper=11.1.6ubuntu1 dh-systemd software-properties-common libyajl-dev
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y build-essential git libpcre3 libpcre3-dev libssl-dev libtool autoconf libxml2-dev libcurl4-openssl-dev apache2-dev libpcre3-dev libxml2-dev zlib1g-dev libssl-dev libgd-dev libgeoip-dev libxslt1-dev libxml2-dev libhiredis-dev libluajit-5.1-dev libmaxminddb-dev libmhash-dev libpam0g-dev libperl-dev quilt dwz debhelper=11.1.6ubuntu1 dh-systemd software-properties-common libyajl-dev
 
 RUN curl https://nginx.org/keys/nginx_signing.key | apt-key add && echo "deb https://nginx.org/packages/ubuntu/ bionic nginx" > /etc/apt/sources.list.d/nginx.list && echo "deb-src https://nginx.org/packages/ubuntu/ bionic nginx" >> /etc/apt/sources.list.d/nginx.list
 
@@ -8,10 +8,7 @@ RUN apt update && apt-cache madison nginx
 
 RUN mkdir -p /opt/nginx/build
 
-
 WORKDIR /opt/nginx/build
-
-RUN git clone -b v3.0.4 --bare --recurse-submodules https://github.com/SpiderLabs/ModSecurity.git libmodsecurity.git
 
 ARG PACKAGE_VERSION="1.0.1"
 ARG NGINX_VERSION="1.18.0"
@@ -23,11 +20,13 @@ RUN git clone -b v1.0.1 https://github.com/SpiderLabs/ModSecurity-nginx.git ${PA
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get source nginx
 
-RUN apt install -y liblua5.1-0 lua5.1 lua5.1-dev
+COPY *.deb /opt/
+
+RUN apt install -y libcurl4-openssl-dev libfuzzy2
+
+RUN dpkg -i /opt/*.deb
 
 RUN mv nginx-${NGINX_VERSION} ${PACKAGE_NAME}-${PACKAGE_VERSION}/nginx
-
-RUN git clone libmodsecurity.git ${PACKAGE_NAME}-${PACKAGE_VERSION}/libmodsecurity && cd ${PACKAGE_NAME}-${PACKAGE_VERSION}/libmodsecurity && git submodule update --init --recursive && rm -rf .git
 
 RUN tar -c ${PACKAGE_NAME}-${PACKAGE_VERSION} | xz -zT 0 - > ${PACKAGE_NAME}_${PACKAGE_VERSION}.orig.tar.xz
 
