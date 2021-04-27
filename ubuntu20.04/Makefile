@@ -1,4 +1,4 @@
-IMG=modsecurity-nginx
+IMG=modsecurity-nginx-focal
 
 all: build
 

@@ -13,8 +13,8 @@ WORKDIR /opt/nginx/build
 
 #RUN git clone -b v3.0.4 --bare --recurse-submodules https://github.com/SpiderLabs/ModSecurity.git libmodsecurity.git
 
-ARG PACKAGE_VERSION="1.0.1"
-ARG NGINX_VERSION="1.18.0"
+ARG PACKAGE_VERSION="1.1.1"
+ARG NGINX_VERSION="1.20.0"
 ARG PACKAGE_NAME="libnginx-mod-http-modsecurity"
 
 #RUN mkdir -p /opt/nginx/build/${PACKAGE_NAME}-${PACKAGE_VERSION}
