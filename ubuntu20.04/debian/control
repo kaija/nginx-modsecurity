@@ -13,7 +13,8 @@ Standards-Version: 3.9.8.0
 Package: libnginx-mod-http-modsecurity
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
-  nginx (>= 1.20.0), nginx(<< 1.20.9)
+  nginx (>= 1.20.0),
+  nginx (<< 1.20.9),
 Suggests: modsecurity-crs
 Description: Web applications security for Nginx
  Modsecurity is an Nginx module for the web application firewall.
